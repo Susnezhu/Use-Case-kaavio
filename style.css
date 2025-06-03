@@ -25,3 +25,20 @@ html, body {
     padding: 10px 30px;
     display: none;
 }
+
+#regWindow, #logWindow{
+    display: none;
+    position: absolute;
+
+    background-color: #878787;
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 20px 50px;
+}
+
+#content { 
+    padding: 50%; /* toimii taustana, jota voi klikkaa */
+}
