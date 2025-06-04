@@ -8,6 +8,8 @@
 </head>
 <body>
 
+    <div id="fadeBg"></div>
+
     <!-- sivun navbari -->
     <div class="navbar">
         <h1>Äänestys sivut</h1>
@@ -24,18 +26,21 @@
     <!-- sivun sisältö -->
     <div id="content">
         <div id="regWindow"> <!-- Tähän myöhemmin input ja choose näppäin -->
-            <p>nimi</p>
-            <p>salasana</p>
-            <p>ylläpitäjänä</p>
+            <input type="text" id="nameReg" placeholder="Nimi" title="Nimi"> <br>
+            <input type="password" id="paswordReg" placeholder="Salasana" title="Salasana">
 
-            <button>Rekisteröitydy</button>
+            <div class="adminReg">
+                <label><input type="checkbox" value="admin" class="admin">ylläpitäjänä</label>
+            </div>
+
+            <button id="registerBtn">Rekisteröitydy</button>
         </div>
 
         <div id="logWindow">  <!-- Tähän myöhemmin input -->
-            <p>nimi</p>
-            <p>salasana</p>
+            <input type="text" id="namelog" placeholder="Nimi" title="Nimi"> <br>
+            <input type="password" id="paswordlog" placeholder="Salasana" title="Salasana"> <br>
 
-            <button>Kirjaudu sisään</button>
+            <button id="logginBtn">Kirjaudu sisään</button>
         </div>
     </div>
 

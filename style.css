@@ -27,18 +27,31 @@ html, body {
 }
 
 #regWindow, #logWindow{
-    display: none;
     position: absolute;
+    display: none;
 
     background-color: #878787;
     border-radius: 5px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 3;
 
     padding: 20px 50px;
 }
 
 #content { 
     padding: 50%; /* toimii taustana, jota voi klikkaa */
+    background-color: transparent;
+}
+
+#fadeBg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(149, 149, 149, 0.677);
+    z-index: 2;
 }
