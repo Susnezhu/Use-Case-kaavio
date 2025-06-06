@@ -11,17 +11,15 @@ let isMenuOpen = false;
 
 //loggin window
 const logWindow = document.getElementById("logWindow");
-let isLogMenuOpen = false;
 const registerBtn = document.getElementById("registerBtn");
+const errorMessageLog = document.getElementById("errorMessageLog");
 
 //register window
 const regWindow = document.getElementById("regWindow");
-let isRegMenuOpen = false;
-const logginBtn = document.getElementById("logginBtn")
-
+const logginBtn = document.getElementById("logginBtn");
+const errorMessageReg = document.getElementById("errorMessageReg");
 
 let users = [] //Tähän tallentuu käyttäjien tiedot ja salasanat. Myöhemmin lisään käyttäjiä Local Storageen
-
 
 //loggin ja register menu avaaminen
 function dropMenuOpener() {
@@ -29,12 +27,21 @@ function dropMenuOpener() {
     isMenuOpen = true;
 }
 
+function showErrorMessage(id, message="", color="red") {
+    id.textContent = message;
+    id.style.color = color;
+    id.style.visibility = "visible";
+
+    setTimeout(function() {
+        id.style.visibility = "hidden";
+    },3000)
+}
+
+
 function logIn() {
     logWindow.style.display = "block"; //näyttää loggin ikkunan
     regWindow.style.display = "none";
     fadeBg.style.display = "block";
-
-    isLogMenuOpen = true;
 
     logginBtn.onclick = function() {
         const nameLog = document.getElementById("namelog").value;
@@ -48,20 +55,20 @@ function logIn() {
                 if (users[i].name === nameLog) {
                     userFound = true;
                     if (users[i].password === passwordLog) {
-                        console.log("kirjautuminen onnistui!");
+                        showErrorMessage(errorMessageLog ,"kirjautuminen onnistui!", "green");
                     } else {
-                        console.log("väärä salasana");
+                        showErrorMessage(errorMessageLog, "väärä salasana");
                     }
                     break;
                 }
             }
 
             if (!userFound) {
-                console.log("käyttäjä ei löytynyt");
+                showErrorMessage(errorMessageLog, "käyttäjä ei löytynyt");
             }
 
         } else {
-            console.log("Täytä molemmat kentät!");  // lisätä myöhemmin tekstit näytölle. (tehdä function)
+            showErrorMessage(errorMessageLog,"Täytä molemmat kentät!");
         }
     }
 }
@@ -70,8 +77,6 @@ function regIn() {
     regWindow.style.display = "block"; //näyttää register ikkunan
     logWindow.style.display = "none";
     fadeBg.style.display = "block";
-
-    isRegMenuOpen = true;
 
     registerBtn.onclick = function() {
         //käyttäjän syöttämät arvot
@@ -84,6 +89,7 @@ function regIn() {
         for (let i = 0; i < users.length; i++) { //tarkistaa, onko samannimistä käyttäjää
             if (users[i].name == nameReg) {
                 nameIsFree = false;
+                break;
             }
         }
 
@@ -97,13 +103,12 @@ function regIn() {
 
                 users.push(user); //laittaa käyttäjän talteen
 
-                console.log("rekisteröityminen onnistui!");
-                console.log(users);
+                showErrorMessage(errorMessageReg, "rekisteröityminen onnistui!", "green");
             } else {
-                console.log("Täytä molemmat kentät!") // tähän kohtaan joku ääni tai teksti näytölle
+                showErrorMessage(errorMessageReg, "Täytä molemmat kentät!")
             }
         } else {
-            console.log("käyttäjä nimi on varattu")
+            showErrorMessage(errorMessageReg, "käyttäjä nimi on varattu")
         }
     }
     
@@ -119,12 +124,9 @@ regWindow.addEventListener("click", function(e) {
 
 //jos klikkaa taustaa
 fadeBg.addEventListener("click", function(e) {
-    if (isLogMenuOpen) {
-        logWindow.style.display = "none";
-    }
-    if (isRegMenuOpen) {
-        regWindow.style.display = "none";
-    }
+    logWindow.style.display = "none";
+    regWindow.style.display = "none";
+    voteAddWindow.style.display = "none";
 
     fadeBg.style.display = "none";
 });

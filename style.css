@@ -13,10 +13,6 @@ html, body {
     align-items: center;
 }
 
-.hidden {
-    display: none;
-}
-
 #dropMenu {
     position: absolute;
     right: 20px;
@@ -37,15 +33,11 @@ html, body {
     transform: translate(-50%, -50%);
     z-index: 3;
 
-    padding: 20px 50px;
+    padding: 10px 60px;
+    padding-top: 50px;
 }
 
-#content { 
-    padding: 50%; /* toimii taustana, jota voi klikkaa */
-    background-color: transparent;
-}
-
-#fadeBg {
+#fadeBg { /* sivun tummennus */
     display: none;
     position: fixed;
     top: 0;
@@ -54,4 +46,49 @@ html, body {
     height: 100%;
     background: rgba(149, 149, 149, 0.677);
     z-index: 2;
+}
+
+#errorMessageLog, #errorMessageReg {
+    visibility: hidden;
+}
+
+#voteContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 700px;
+    margin: 20px auto;
+}
+
+#voteAddWindow {
+    display: none;
+
+    position: absolute;
+    background-color: #878787;
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+
+    padding: 50px 100px;
+}
+
+#optionInputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.textButton {
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#delOptionBtn {
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
 }

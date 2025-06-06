@@ -25,7 +25,7 @@
 
     <!-- sivun sisältö -->
     <div id="content">
-        <div id="regWindow"> <!-- Tähän myöhemmin input ja choose näppäin -->
+        <div id="regWindow">
             <input type="text" id="nameReg" placeholder="Nimi" title="Nimi"> <br>
             <input type="password" id="paswordReg" placeholder="Salasana" title="Salasana">
 
@@ -34,17 +34,44 @@
             </div>
 
             <button id="registerBtn">Rekisteröitydy</button>
+
+            <p id="errorMessageReg">...</p>
         </div>
 
-        <div id="logWindow">  <!-- Tähän myöhemmin input -->
+        <div id="logWindow">
             <input type="text" id="namelog" placeholder="Nimi" title="Nimi"> <br>
             <input type="password" id="paswordlog" placeholder="Salasana" title="Salasana"> <br>
 
             <button id="logginBtn">Kirjaudu sisään</button>
+
+            <p id="errorMessageLog">...</p>
         </div>
     </div>
 
+    <div id="voteAddWindow">
+        <h2>lisää uusi äänestys</h2>
 
-    <script src="script.js"></script>
+        <p>aihe:</p>
+        <input type="text">
+        
+        <div id="optionInputs">
+            <p>vaihtoehdot:</p>
+            <input type="text" id="optionInput1" placeholder="vaihtoehto 1">
+            <input type="text" id="optionInput2" placeholder="vaihtoehto 2">
+        </div>
+            <button id="addMoreOptions" class="textButton">Lisää vaihtoehto</button>
+
+        <button id="saveVote">Luo äänestys</button>
+    </div>
+
+    <div id="voteContainer">
+        <button onclick="addVote()">Uusi äänestys</button>
+    </div>
+
+
+    <a href="test.html">testi</a>
+
+    <script src="loggin.js"></script>
+    <script src="votes.js"></script>
 </body>
 </html>
