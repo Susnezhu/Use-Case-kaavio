@@ -21,10 +21,19 @@ const errorMessageReg = document.getElementById("errorMessageReg");
 
 let users = [] //Tähän tallentuu käyttäjien tiedot ja salasanat. Myöhemmin lisään käyttäjiä Local Storageen
 
-//loggin ja register menu avaaminen
-function dropMenuOpener() {
-    dropMenu.style.display = "block";
-    isMenuOpen = true;
+let logged = false; //tarkistaa, onko käyttäjä kirjautunut sisään
+let adminRights = false; //kun käyttäjä on kirjautunut, tarkistetaan, onko hän ylläpitäjä
+
+//loggin ja register menu avaaminen, sekä kirjautuminen ulos
+dropBtn.onclick = function() {
+    if (!logged) {
+        dropMenu.style.display = "block";
+        isMenuOpen = true;
+    } else {
+        dropBtn.textContent = "Kirjaudu"
+        logged = false;
+        checkAdminRights(false);
+    }
 }
 
 function showErrorMessage(id, message="", color="red") {
@@ -56,6 +65,16 @@ function logIn() {
                     userFound = true;
                     if (users[i].password === passwordLog) {
                         showErrorMessage(errorMessageLog ,"kirjautuminen onnistui!", "green");
+                        logged = true;
+                        dropBtn.textContent = "Kirjaudu ulos"
+                        checkAdminRights(users[i].admin)
+                        resetLogRegForm()
+
+                        setTimeout(function() {
+                            logWindow.style.display = "none";
+                            fadeBg.style.display = "none";
+                        },1000)
+
                     } else {
                         showErrorMessage(errorMessageLog, "väärä salasana");
                     }
@@ -104,6 +123,12 @@ function regIn() {
                 users.push(user); //laittaa käyttäjän talteen
 
                 showErrorMessage(errorMessageReg, "rekisteröityminen onnistui!", "green");
+                resetLogRegForm()
+                setTimeout(function() {
+                    regWindow.style.display = "none";
+                    fadeBg.style.display = "none";
+                },1000)
+
             } else {
                 showErrorMessage(errorMessageReg, "Täytä molemmat kentät!")
             }
@@ -112,6 +137,31 @@ function regIn() {
         }
     }
     
+}
+
+//tarkistaa onko ylläpitäjä oikeuksia käyttäjällä
+function checkAdminRights(userRights) {
+    if (userRights) {
+        adminRights = true;
+    } else {
+        adminRights = false;
+    }
+
+    if (adminRights) {
+        addVoteBtn.style.display = "block";
+
+        const deleteButtons = document.querySelectorAll('.voteDeleteBtn');
+        deleteButtons.forEach(function(btn) {
+            btn.style.display = "block";
+        });
+    } else {
+        addVoteBtn.style.display = "none";
+
+        const deleteButtons = document.querySelectorAll('.voteDeleteBtn');
+        deleteButtons.forEach(function(btn) {
+            btn.style.display = "none";
+        });
+    }
 }
 
 

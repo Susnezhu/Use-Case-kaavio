@@ -2,6 +2,7 @@ const voteContainer = document.getElementById("voteContainer") //Grid conteineri
 
 const voteAddWindow = document.getElementById("voteAddWindow"); //ikkuna, jossa voi tehdä uuden äänestyksen
 
+const addVoteBtn = document.getElementById("addVoteBtn")
 const voteName = document.getElementById("voteName");
 const optionInput1 = document.getElementById("optionInput1");
 const optionInput2 = document.getElementById("optionInput2");
@@ -60,6 +61,7 @@ function addVote() {
 
         //äänestyksen poistonäppäin
         const voteDeleteBtn = document.createElement("button");
+        voteDeleteBtn.className = "voteDeleteBtn"
         voteDeleteBtn.id = "voteDeleteBtn" + groupName;
         voteDeleteBtn.innerHTML = "Poista";
 
@@ -180,5 +182,3 @@ function renumberOptions() {
         container.id = "optiondivContainer" + number;
     });
 }
-
-

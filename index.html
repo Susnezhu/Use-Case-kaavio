@@ -15,7 +15,7 @@
         <h1>Äänestys sivut</h1>
 
         <div class="dropdown">
-            <button id="dropBtn" onclick="dropMenuOpener()">Kirjaudu</button>
+            <button id="dropBtn">Kirjaudu</button>
             <ul id="dropMenu">
                 <li><button onclick="logIn()">Kirjautuminen</button></li>
                 <li><button onclick="regIn()">Rekisteröityminen</button></li>
@@ -67,10 +67,11 @@
     <div id="voteContainer">
     </div>
 
-    <button onclick="addVote()" class="addVoteBtn">Uusi äänestys</button>
-
+    <button onclick="addVote()" id="addVoteBtn">Uusi äänestys</button>
 
     <script src="loggin.js"></script>
     <script src="votes.js"></script>
+
+    <script src="script.js"></script> 
 </body>
 </html>
