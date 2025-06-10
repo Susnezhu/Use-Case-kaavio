@@ -56,6 +56,7 @@ function addVote() {
         //äänestys näppäin
         const voteButton = document.createElement("button");
         voteButton.id = "voteButton" + groupName;
+        voteButton.className = "voteButton"
         voteButton.innerHTML = "Äänestä"
         rowdiv.appendChild(voteButton);
 
@@ -63,7 +64,8 @@ function addVote() {
         const voteDeleteBtn = document.createElement("button");
         voteDeleteBtn.className = "voteDeleteBtn"
         voteDeleteBtn.id = "voteDeleteBtn" + groupName;
-        voteDeleteBtn.innerHTML = "Poista";
+        voteDeleteBtn.textContent = "Poista";
+
 
         voteDeleteBtn.onclick = function () {
             divContainer.remove();

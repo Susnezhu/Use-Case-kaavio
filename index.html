@@ -65,6 +65,32 @@
     </div>
 
     <div id="voteContainer">
+        <!-- esimerkki äänestys, jota ei voi poistaa -->
+        <div class="exampleVote">
+            <h2>Paras ohjelmointikieli?</h2>
+            <div class="row">
+                <div>
+                    <div class="optionPair">
+                        <input type="radio" name="example" id="exampleOption1">
+                        <label htmlfor="exampleOption1">JavaScript</label>
+                    </div>
+                    <div class="optionPair">
+                        <input type="radio" name="example" id="exampleOption2">
+                        <label htmlfor="exampleOption2">Python</label>
+                    </div>
+                    <div class="optionPair">
+                        <input type="radio" name="example" id="exampleOption3">
+                        <label htmlfor="exampleOption3">C#</label>
+                    </div>
+                    <div class="optionPair">
+                        <input type="radio" name="example" id="exampleOption4">
+                        <label htmlfor="exampleOption4">PHP</label>
+                    </div>
+                </div>
+
+                <button id="exampleVoteBtn">Äänestä</button>
+            </div>
+        </div>
     </div>
 
     <button onclick="addVote()" id="addVoteBtn">Uusi äänestys</button>

@@ -111,7 +111,19 @@ html, body {
 
 .voteItem {
     background-color: #b7b7b7;
-    padding: 20px 50px;
+    padding: 10px 30px;
+    padding-bottom: 40px;
+    position: relative;
+}
+
+.voteButton {
+    width: 100px;
+    height: 50px;
+}
+
+#exampleVoteBtn {
+    width: 100px;
+    height: 50px;
 }
 
 .divOptions {
@@ -123,4 +135,24 @@ html, body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: end;
+}
+
+.exampleVote {
+    background-color: #b7b7b7;
+    padding: 10px 30px;
+    padding-bottom: 40px;
+    position: relative;
+}
+
+.voteDeleteBtn {
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
