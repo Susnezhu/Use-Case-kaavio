@@ -129,6 +129,9 @@ fadeBg.addEventListener("click", function(e) {
     voteAddWindow.style.display = "none";
 
     fadeBg.style.display = "none";
+
+    resetVoteForm();
+    resetLogRegForm();
 });
 
 

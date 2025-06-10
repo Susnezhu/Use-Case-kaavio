@@ -3,6 +3,7 @@ html, body {
     padding: 0;
     width: 100%;
     box-sizing: border-box;
+    margin-bottom: 100px;
 }
 
 .navbar {
@@ -60,6 +61,15 @@ html, body {
     margin: 20px auto;
 }
 
+.addVoteBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    z-index: 10;
+}
+
 #voteAddWindow {
     display: none;
 
@@ -86,9 +96,25 @@ html, body {
     cursor: pointer;
 }
 
-#delOptionBtn {
+.delOptionBtn {
     text-decoration: underline;
     background: none;
     border: none;
     cursor: pointer;
+}
+
+.voteItem {
+    background-color: #b7b7b7;
+    padding: 20px 50px;
+}
+
+.divOptions {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

@@ -52,7 +52,7 @@
         <h2>lisää uusi äänestys</h2>
 
         <p>aihe:</p>
-        <input type="text">
+        <input type="text" id="voteName">
         
         <div id="optionInputs">
             <p>vaihtoehdot:</p>
@@ -65,11 +65,10 @@
     </div>
 
     <div id="voteContainer">
-        <button onclick="addVote()">Uusi äänestys</button>
     </div>
 
+    <button onclick="addVote()" class="addVoteBtn">Uusi äänestys</button>
 
-    <a href="test.html">testi</a>
 
     <script src="loggin.js"></script>
     <script src="votes.js"></script>
