@@ -14,6 +14,14 @@ const optionInputs = document.getElementById("optionInputs");
 let groupName = 1
 let optionNum = 1
 
+//tähän tulee kaikki äänestykset ja niiden arvot
+let allVotes = {example: {
+    option1: {value: "JavaScript" , votes: 15},
+    option2: {value: "Python" , votes: 18},
+    option3: {value: "C#" , votes: 9},
+    option4: {value: "PHP" , votes: 4}
+}};
+
 //lisää uuden äänestyksen
 function addVote() {
     voteAddWindow.style.display = "block";
@@ -23,6 +31,7 @@ function addVote() {
 
     saveVote.onclick = function() {
 
+        if (!voteName.value.trim()) {return}; //jos nimi ei ole annettu
         if (!optionInput1.value.trim() || !optionInput2.value.trim()) {return}; //jos on tyhjät kaksi ensimmäistä
 
         //div äänestys konteireni
@@ -60,6 +69,12 @@ function addVote() {
         voteButton.innerHTML = "Äänestä"
         rowdiv.appendChild(voteButton);
 
+        const currentGroup = groupName;
+
+        voteButton.onclick = function() {
+            vote(currentGroup);
+        };
+
         //äänestyksen poistonäppäin
         const voteDeleteBtn = document.createElement("button");
         voteDeleteBtn.className = "voteDeleteBtn"
@@ -68,7 +83,8 @@ function addVote() {
 
 
         voteDeleteBtn.onclick = function () {
-            divContainer.remove();
+            divContainer.remove(); //poistaa äänestyksen div konteinerin
+            delete allVotes["group" + currentGroup]; //poistaa äänestyksen tiedot objektista
         }
 
         divContainer.appendChild(rowdiv);
@@ -129,6 +145,20 @@ function createNewRadio(userInput, optionNum, groupName, container) {
     newDiv.appendChild(label);
 
     container.appendChild(newDiv);
+
+    let name = "group" + groupName;
+    let numberOption = "option" + optionNum;
+
+    if (!allVotes[name]) {
+        allVotes[name] = {};
+    }
+
+    allVotes[name][numberOption] = {
+        value: radio.value,
+        votes: 0
+    };
+
+    console.log(allVotes);
 }
 
 //lisää uuden äänestys vaihtoehto kentän
@@ -183,4 +213,36 @@ function renumberOptions() {
         delBtn.id = "delOption" + number;
         container.id = "optiondivContainer" + number;
     });
+}
+
+//äänestys
+function vote(name) {
+    group = "group" + name
+    if (name === "exampleGroup") {group = "example"} //jos äänestettiin malliäänestyksessä
+
+    const radios = document.querySelectorAll(`input[name="${group}"]`); //hakee kaikki radio-näppäimet annetusta ryhmästä
+    let selected = false;
+
+    //tarkistaa mintä vaihdoehdon valittiin
+    for (let radio of radios) {
+        if (radio.checked) {
+            option = radio.id
+            selected = radio.value;
+            break;
+        }
+    }
+
+    if (!selected) return; //jos mitään ei ole valittu
+
+    //tarkistukset (pitää ottaa myöhemmin pois!)
+    console.log(selected)
+    allVotes[group][option].votes++;
+    console.log(allVotes[group][option])
+
+    showVoteResults()
+}
+
+
+function showVoteResults() {
+    //funktion pitäisi näyttää äänestyksen äänet, jos nykyinen käyttäjä, on jo äänestänyt
 }
