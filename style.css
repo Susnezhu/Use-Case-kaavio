@@ -21,6 +21,7 @@ html, body {
     background-color: #878787;
     padding: 10px 30px;
     display: none;
+    z-index: 10;
 }
 
 #logOut {
@@ -36,7 +37,7 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 3;
+    z-index: 9;
 
     padding: 10px 60px;
     padding-top: 50px;
@@ -50,7 +51,7 @@ html, body {
     width: 100%;
     height: 100%;
     background: rgba(149, 149, 149, 0.677);
-    z-index: 2;
+    z-index: 3;
 }
 
 #errorMessageLog, #errorMessageReg {
@@ -73,7 +74,7 @@ html, body {
     width: 200px;
     z-index: 10;
 
-    /* display: none; */
+    display: none;
 }
 
 #voteAddWindow {
@@ -85,7 +86,7 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 3;
+    z-index: 5;
 
     padding: 50px 100px;
 }
@@ -155,4 +156,19 @@ html, body {
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.resultBar {
+    margin: 10px 0;
+}
+
+.resultBar span {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.bar {
+    height: 10px;
+    background-color: #4d4c4c;
+    border-radius: 4px;
 }

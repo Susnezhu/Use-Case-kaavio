@@ -26,8 +26,8 @@
     <!-- sivun sisältö -->
     <div id="content">
         <div id="regWindow">
-            <input type="text" id="nameReg" placeholder="Nimi" title="Nimi"> <br>
-            <input type="password" id="paswordReg" placeholder="Salasana" title="Salasana">
+            <input type="text" id="nameReg" placeholder="Nimi" title="Nimi" maxlength="20"> <br>
+            <input type="password" id="paswordReg" placeholder="Salasana" title="Salasana" maxlength="20">
 
             <div class="adminReg">
                 <label><input type="checkbox" value="admin" class="admin">ylläpitäjänä</label>
@@ -39,8 +39,8 @@
         </div>
 
         <div id="logWindow">
-            <input type="text" id="namelog" placeholder="Nimi" title="Nimi"> <br>
-            <input type="password" id="paswordlog" placeholder="Salasana" title="Salasana"> <br>
+            <input type="text" id="namelog" placeholder="Nimi" title="Nimi" maxlength="15"> <br>
+            <input type="password" id="paswordlog" placeholder="Salasana" title="Salasana" maxlength="15"> <br>
 
             <button id="logginBtn">Kirjaudu sisään</button>
 
@@ -52,12 +52,12 @@
         <h2>lisää uusi äänestys</h2>
 
         <p>aihe:</p>
-        <input type="text" id="voteName">
+        <input type="text" id="voteName" maxlength="15">
         
         <div id="optionInputs">
             <p>vaihtoehdot:</p>
-            <input type="text" id="optionInput1" placeholder="vaihtoehto 1">
-            <input type="text" id="optionInput2" placeholder="vaihtoehto 2">
+            <input type="text" id="optionInput1" placeholder="vaihtoehto 1" maxlength="15">
+            <input type="text" id="optionInput2" placeholder="vaihtoehto 2" maxlength="15">
         </div>
             <button id="addMoreOptions" class="textButton">Lisää vaihtoehto</button>
 
@@ -66,38 +66,36 @@
 
     <div id="voteContainer">
         <!-- esimerkki äänestys, jota ei voi poistaa -->
-        <div class="exampleVote">
+        <div class="voteItem" id="voteItem0">
             <h2>Paras ohjelmointikieli?</h2>
-            <div class="row">
-                <div>
+            <div class="row" id="row">
+                <div class="divOptions">
                     <div class="optionPair">
-                        <input type="radio" name="example" id="option1" value="JavaScript">
+                        <input type="radio" name="group0" id="option1" value="JavaScript">
                         <label for="option1">JavaScript</label>
                     </div>
                     <div class="optionPair">
-                        <input type="radio" name="example" id="option2" value="Python">
+                        <input type="radio" name="group0" id="option2" value="Python">
                         <label for="option2">Python</label>
                     </div>
                     <div class="optionPair">
-                        <input type="radio" name="example" id="option3" value="C#">
+                        <input type="radio" name="group0" id="option3" value="C#">
                         <label for="option3">C#</label>
                     </div>
                     <div class="optionPair">
-                        <input type="radio" name="example" id="option4" value="PHP">
+                        <input type="radio" name="group0" id="option4" value="PHP">
                         <label for="option4">PHP</label>
                     </div>
                 </div>
 
-                <button id="exampleVoteBtn" onclick="vote('exampleGroup')">Äänestä</button>
+                <button id="exampleVoteBtn" onclick="vote(0)" class="voteButton">Äänestä</button>
             </div>
         </div>
     </div>
 
     <button onclick="addVote()" id="addVoteBtn">Uusi äänestys</button>
 
-    <script src="loggin.js"></script>
     <script src="votes.js"></script>
-
-    <script src="script.js"></script> 
+    <script src="loggin.js"></script>
 </body>
 </html>

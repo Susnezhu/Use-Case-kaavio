@@ -23,16 +23,20 @@ let users = [] //Tähän tallentuu käyttäjien tiedot ja salasanat. Myöhemmin 
 
 let logged = false; //tarkistaa, onko käyttäjä kirjautunut sisään
 let adminRights = false; //kun käyttäjä on kirjautunut, tarkistetaan, onko hän ylläpitäjä
+let whoIsLogged = false; //tähän tallentuu, kuka on nyt kirjautunut
 
 //loggin ja register menu avaaminen, sekä kirjautuminen ulos
 dropBtn.onclick = function() {
     if (!logged) {
         dropMenu.style.display = "block";
         isMenuOpen = true;
+        checkLoggin()
     } else {
         dropBtn.textContent = "Kirjaudu"
         logged = false;
         checkAdminRights(false);
+        returnVoteView();
+        checkLoggin();
     }
 }
 
@@ -67,8 +71,11 @@ function logIn() {
                         showErrorMessage(errorMessageLog ,"kirjautuminen onnistui!", "green");
                         logged = true;
                         dropBtn.textContent = "Kirjaudu ulos"
+                        whoIsLogged = users[i]
                         checkAdminRights(users[i].admin)
-                        resetLogRegForm()
+                        resetLogRegForm();
+                        checkLoggin();
+                        showVoteResults()
 
                         setTimeout(function() {
                             logWindow.style.display = "none";
@@ -117,7 +124,8 @@ function regIn() {
                 let user = {
                     name: nameReg,
                     password: passwordReg,
-                    admin: isAdmin
+                    admin: isAdmin,
+                    voting: {} //tähän kaikki mitä käyttäjä on äänestänyt
                 }
 
                 users.push(user); //laittaa käyttäjän talteen
@@ -163,6 +171,26 @@ function checkAdminRights(userRights) {
         });
     }
 }
+
+//Jos ei ole kirjautunut, äänestysnäppäimet ovat pois päältä
+function checkLoggin() {
+    const voteButtons = document.querySelectorAll(".voteButton");
+
+    voteButtons.forEach(function(button) {
+        if (!logged) {
+            button.disabled = true;
+            button.style.filter = "brightness(70%)";
+            button.style.cursor = "not-allowed";
+            button.title = "Kirjaudu äänestääksesi";
+        } else {
+            button.disabled = false;
+            button.style.filter = "brightness(100%)";
+            button.style.cursor = "pointer";
+            button.title = "";
+        }
+    });
+}
+checkLoggin();
 
 
 logWindow.addEventListener("click", function(e) {

@@ -15,12 +15,21 @@ let groupName = 1
 let optionNum = 1
 
 //tähän tulee kaikki äänestykset ja niiden arvot
-let allVotes = {example: {
+let allVotes = {group0: {
     option1: {value: "JavaScript" , votes: 15},
     option2: {value: "Python" , votes: 18},
     option3: {value: "C#" , votes: 9},
     option4: {value: "PHP" , votes: 4}
 }};
+
+//tähän kaikki äänestykset, kun tarttee niitä laittaa taikaisin paikalle
+let savedRows = {}; // {groupName: rowDiv}
+
+//etsii ja lisää esimerkki äänestyksen heti sivun avattaessa
+const exampleRow = document.querySelector('#voteItem0 .row');
+if (exampleRow) {
+    savedRows["group0"] = exampleRow;
+}
 
 //lisää uuden äänestyksen
 function addVote() {
@@ -71,6 +80,8 @@ function addVote() {
 
         const currentGroup = groupName;
 
+        savedRows["group" + groupName] = rowdiv;
+
         voteButton.onclick = function() {
             vote(currentGroup);
         };
@@ -85,6 +96,8 @@ function addVote() {
         voteDeleteBtn.onclick = function () {
             divContainer.remove(); //poistaa äänestyksen div konteinerin
             delete allVotes["group" + currentGroup]; //poistaa äänestyksen tiedot objektista
+            delete savedRows["group" + currentGroup]; //tässä myös
+            delete whoIsLogged.voting["group" + currentGroup];
         }
 
         divContainer.appendChild(rowdiv);
@@ -158,7 +171,6 @@ function createNewRadio(userInput, optionNum, groupName, container) {
         votes: 0
     };
 
-    console.log(allVotes);
 }
 
 //lisää uuden äänestys vaihtoehto kentän
@@ -176,6 +188,7 @@ function addOptionField() {
     input.type = "text";
     input.placeholder = "Vaihtoehto " + optionNumber;
     input.id = "optionInput" + optionNumber;
+    input.maxlength = 15
 
     //luo poistonäppäimen
     const delBtn = document.createElement("button");
@@ -218,10 +231,10 @@ function renumberOptions() {
 //äänestys
 function vote(name) {
     group = "group" + name
-    if (name === "exampleGroup") {group = "example"} //jos äänestettiin malliäänestyksessä
 
     const radios = document.querySelectorAll(`input[name="${group}"]`); //hakee kaikki radio-näppäimet annetusta ryhmästä
     let selected = false;
+    let option;
 
     //tarkistaa mintä vaihdoehdon valittiin
     for (let radio of radios) {
@@ -234,15 +247,82 @@ function vote(name) {
 
     if (!selected) return; //jos mitään ei ole valittu
 
-    //tarkistukset (pitää ottaa myöhemmin pois!)
-    console.log(selected)
-    allVotes[group][option].votes++;
-    console.log(allVotes[group][option])
+    whoIsLogged.voting[group] = selected; //muistaa mitä käyttäjä on äänestänyt
+    allVotes[group][option].votes++; //lisää yhden ääneen äänestetyyn äänestykseen
 
-    showVoteResults()
+    returnVoteView();
+    showVoteResults();
 }
 
-
+//funktion pitäisi näyttää äänestyksen äänet, jos nykyinen käyttäjä, on jo äänestänyt
 function showVoteResults() {
-    //funktion pitäisi näyttää äänestyksen äänet, jos nykyinen käyttäjä, on jo äänestänyt
+
+    const votedGroups = whoIsLogged.voting; // mitä äänestyksiä käyttäjä on jo äänestänytß
+
+    for (const group in votedGroups) {
+        const groupNumber = group.replace("group", ""); // jättää vain numeron
+        const container = document.getElementById("voteItem" + groupNumber);
+
+        if (!container) continue; // jos konteineri ei löytynyt
+
+        const oldRow = savedRows[group];
+        if (oldRow) {oldRow.remove();} // poistaa rowdiv, jossa on näppäin ja input radio napit
+
+        //luo uuden div, johon tulee palkit
+        const resultsDiv = document.createElement("div"); 
+        resultsDiv.className = "results";
+
+        const votes = allVotes[group];
+
+        let totalVotes = 0; //kaikki äänestykset yhdessä (yhdestä konteinerista)
+        for (let key in votes) {
+            totalVotes += votes[key].votes;
+        }
+
+        //jokaiselle äänestys vaihtoehdolle oma palkki
+        for (let key in votes) {
+
+            //prosenttien laskeminen yhden desimaalin tarkkuudella
+            let prosent = 0;
+            if (totalVotes > 0) {
+                prosent = (votes[key].votes / totalVotes) * 100;
+                prosent = parseFloat(prosent.toFixed(1));
+            }
+
+            let resultBar = document.createElement("div");
+            resultBar.className = "resultBar";
+
+            let label = document.createElement("span");
+            label.textContent = votes[key].value + ": " + prosent + "%";
+
+            let bar = document.createElement("div");
+            bar.className = "bar";
+            bar.style.width = prosent + 1 + "%";
+
+            resultBar.appendChild(label);
+            resultBar.appendChild(bar);
+            resultsDiv.appendChild(resultBar);
+        }
+
+        container.insertBefore(resultsDiv, container.querySelector(".voteDeleteBtn"));
+    }
+}
+
+//palauttaa alkuperäinen näkymä äänestykselle
+function returnVoteView() {
+    for (let group in savedRows) {
+        const groupNumber = group.replace("group", ""); // jättää vain numeron
+        const container = document.getElementById("voteItem" + groupNumber);
+
+        if (!container) continue; //jos ei löytynyt
+
+        // Etsii .results divin ja poistaa sen, jos on
+        const results = container.querySelector(".results");
+        if (results) {
+            results.remove();
+        }
+
+        // Lisää takaisin tallennettu rowdiv
+        container.insertBefore(savedRows[group], container.querySelector(".voteDeleteBtn"));
+    }
 }
