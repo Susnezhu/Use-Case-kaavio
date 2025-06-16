@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Äänestys sivut</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -16,9 +17,9 @@
 
         <div class="dropdown">
             <button id="dropBtn">Kirjaudu</button>
-            <ul id="dropMenu">
-                <li><button onclick="logIn()">Kirjautuminen</button></li>
-                <li><button onclick="regIn()">Rekisteröityminen</button></li>
+            <ul id="dropMenu" style="list-style-type:none;">
+                <li><button onclick="logIn()" class="textButton" style="font-size: 15px;">Kirjautuminen</button></li>
+                <li><button onclick="regIn()" class="textButton" style="font-size: 15px;">Rekisteröityminen</button></li>
             </ul>
         </div>
     </div>
@@ -26,74 +27,83 @@
     <!-- sivun sisältö -->
     <div id="content">
         <div id="regWindow">
+            <h3>Rekisteröidy</h3>
+
             <input type="text" id="nameReg" placeholder="Nimi" title="Nimi" maxlength="20"> <br>
-            <input type="password" id="paswordReg" placeholder="Salasana" title="Salasana" maxlength="20">
+            <input type="password" id="paswordReg" placeholder="Salasana" title="Salasana" maxlength="20" class="addGap">
 
             <div class="adminReg">
                 <label><input type="checkbox" value="admin" class="admin">ylläpitäjänä</label>
             </div>
 
-            <button id="registerBtn">Rekisteröitydy</button>
+            <button id="registerBtn" class="addGap">Rekisteröitydy</button>
 
             <p id="errorMessageReg">...</p>
         </div>
 
         <div id="logWindow">
-            <input type="text" id="namelog" placeholder="Nimi" title="Nimi" maxlength="15"> <br>
+            <h3>Kirjaudu sisään</h3>
+
+            <input type="text" id="namelog" placeholder="Nimi" title="Nimi" maxlength="15" class="addGap"> <br>
             <input type="password" id="paswordlog" placeholder="Salasana" title="Salasana" maxlength="15"> <br>
 
-            <button id="logginBtn">Kirjaudu sisään</button>
+            <button id="logginBtn" class="addGap">Kirjaudu sisään</button>
 
             <p id="errorMessageLog">...</p>
         </div>
-    </div>
 
-    <div id="voteAddWindow">
-        <h2>lisää uusi äänestys</h2>
+        <div id="voteAddWindow">
+            <h2>lisää uusi äänestys</h2>
 
-        <p>aihe:</p>
-        <input type="text" id="voteName" maxlength="15">
-        
-        <div id="optionInputs">
-            <p>vaihtoehdot:</p>
-            <input type="text" id="optionInput1" placeholder="vaihtoehto 1" maxlength="15">
-            <input type="text" id="optionInput2" placeholder="vaihtoehto 2" maxlength="15">
-        </div>
-            <button id="addMoreOptions" class="textButton">Lisää vaihtoehto</button>
-
-        <button id="saveVote">Luo äänestys</button>
-    </div>
-
-    <div id="voteContainer">
-        <!-- esimerkki äänestys, jota ei voi poistaa -->
-        <div class="voteItem" id="voteItem0">
-            <h2>Paras ohjelmointikieli?</h2>
-            <div class="row" id="row">
-                <div class="divOptions">
-                    <div class="optionPair">
-                        <input type="radio" name="group0" id="option1" value="JavaScript">
-                        <label for="option1">JavaScript</label>
-                    </div>
-                    <div class="optionPair">
-                        <input type="radio" name="group0" id="option2" value="Python">
-                        <label for="option2">Python</label>
-                    </div>
-                    <div class="optionPair">
-                        <input type="radio" name="group0" id="option3" value="C#">
-                        <label for="option3">C#</label>
-                    </div>
-                    <div class="optionPair">
-                        <input type="radio" name="group0" id="option4" value="PHP">
-                        <label for="option4">PHP</label>
-                    </div>
+            <div class="addVoteInputs">
+                <p>aihe:</p>
+                <input type="text" id="voteName" maxlength="15">
+                
+                <div id="optionInputs">
+                    <p>vaihtoehdot:</p>
+                    <input type="text" id="optionInput1" placeholder="vaihtoehto 1" maxlength="20">
+                    <input type="text" id="optionInput2" placeholder="vaihtoehto 2" maxlength="20">
                 </div>
-
-                <button id="exampleVoteBtn" onclick="vote(0)" class="voteButton">Äänestä</button>
+            </div>
+            <div class="addVoteButtons">
+                <button id="addMoreOptions" class="textButton">Lisää vaihtoehto</button>
+                <button id="saveVote">Lisää</button>
             </div>
         </div>
-    </div>
 
-    <button onclick="addVote()" id="addVoteBtn">Uusi äänestys</button>
+        <div id="voteContainer">
+            <!-- esimerkki äänestys, jota ei voi poistaa -->
+            <div class="voteItem" id="voteItem0">
+                <h2>Paras ohjelmointikieli?</h2>
+                <hr>
+                <div class="row">
+                    <div class="divOptions">
+                        <div class="optionPair">
+                            <input type="radio" name="group0" id="option1" value="JavaScript">
+                            <label for="option1">JavaScript</label>
+                        </div>
+                        <div class="optionPair">
+                            <input type="radio" name="group0" id="option2" value="Python">
+                            <label for="option2">Python</label>
+                        </div>
+                        <div class="optionPair">
+                            <input type="radio" name="group0" id="option3" value="C#">
+                            <label for="option3">C#</label>
+                        </div>
+                        <div class="optionPair">
+                            <input type="radio" name="group0" id="option4" value="PHP">
+                            <label for="option4">PHP</label>
+                        </div>
+                    </div>
+
+                    <button id="exampleVoteBtn" onclick="vote(0)" class="voteButton">Äänestä</button>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="addVote()" id="addVoteBtn">Uusi äänestys</button>
+
+    </div>
 
     <script src="votes.js"></script>
     <script src="loggin.js"></script>

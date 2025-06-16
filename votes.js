@@ -52,6 +52,9 @@ function addVote() {
         heading.textContent = voteName.value;
         divContainer.appendChild(heading);
 
+        const line = document.createElement("hr");
+        divContainer.appendChild(line);
+
         const rowdiv = document.createElement("div");
         rowdiv.className = "row"
 
@@ -188,7 +191,7 @@ function addOptionField() {
     input.type = "text";
     input.placeholder = "Vaihtoehto " + optionNumber;
     input.id = "optionInput" + optionNumber;
-    input.maxlength = 15
+    input.maxLength = 20
 
     //luo poistonäppäimen
     const delBtn = document.createElement("button");
@@ -294,6 +297,7 @@ function showVoteResults() {
 
             let label = document.createElement("span");
             label.textContent = votes[key].value + ": " + prosent + "%";
+            label.style.marginBottom = "0px";
 
             let bar = document.createElement("div");
             bar.className = "bar";
